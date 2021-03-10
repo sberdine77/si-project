@@ -67,8 +67,9 @@ Grafo.prototype.dfs = function(source) {
 Grafo.prototype.GBFS = function(startNode,endNode){
   let openQueue = [];
   let closedQueue = [];
+  let parent = [];
   let minHeuristic = Number.MAX_VALUE ;
-  let minHeuristicID ;
+  let minHeuristicID = startNode ;
   openQueue.push(startNode)
   while(openQueue.length>0){
     for(let op of openQueue){
@@ -81,10 +82,12 @@ Grafo.prototype.GBFS = function(startNode,endNode){
     }
     for(let i of this.adjacencyList[minHeuristicID]){
       if(i === endNode){
+        parent[i]=minHeuristicID;
         // momento de adicionar o no como visitado na tela e printar o caminho inteiro na tela
         break;
       }
       if(!closedQueue.includes(i) && !openQueue.includes(i)){
+        parent[i]=minHeuristicID;
         openQueue.push(i);
       }
     }
