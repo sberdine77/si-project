@@ -23,17 +23,8 @@ class Grafo {
 	}
 
   addHeuristic(source, destination, val){
-    //if((typeof this.adjacencyList[source][destination]) !== "object")
-      //this.adjacencyList[source][destination]=[];
-    //this.adjacencyList[source][destination].push(val);
-    //if((typeof this.heuristic[source][destination]) !== "object")
-    //  this.heuristic[source][destination] = [];
-    //this.heuristic[source][destination].push(val);
-    //if((typeof this.heuristic[destination][source]) !== "object")
-    //  this.heuristic[destination][source] = [];
-    //this.heuristic[destination][source].push(val);
-    this.adjacencyList[source][destination]=val;
-    this.adjacencyList[destination][source]=val;
+    this.heuristic[source][destination]=val;
+    this.heuristic[destination][source]=val;
   }
 }
 
@@ -81,8 +72,8 @@ Grafo.prototype.GBFS = function(startNode,endNode){
   openQueue.push(startNode)
   while(openQueue.length>0){
     for(let op of openQueue){
-      if(this.adjacencyList[op][endNode] <= minHeuristic){
-        minHeuristic = this.adjacencyList[op][endNode] ;
+      if(this.heuristic[op][endNode] <= minHeuristic){
+        minHeuristic = this.heuristic[op][endNode] ;
         minHeuristicID = op ;
         closedQueue.push(op); // momento de adicionar o no como visitado na tela
         openQueue.splice(openQueue.indexOf(op),1);
