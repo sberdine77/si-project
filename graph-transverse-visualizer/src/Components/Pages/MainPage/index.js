@@ -35,6 +35,107 @@ function MainPage() {
 	graph.addLink(9, 10);
 	graph.addLink(6, 10);
 
+	graph.addHeuristic(1,1,0);
+	graph.addHeuristic(1,2,11);
+	graph.addHeuristic(1,3,7);
+	graph.addHeuristic(1,4,9);
+	graph.addHeuristic(1,5,3);
+	graph.addHeuristic(1,6,12);
+	graph.addHeuristic(1,7,10);
+	graph.addHeuristic(1,8,12);
+	graph.addHeuristic(1,9,13);
+	graph.addHeuristic(1,10,15);
+	//graph.addHeuristic(2,1,);
+	graph.addHeuristic(2,2,0);
+	graph.addHeuristic(2,3,4);
+	graph.addHeuristic(2,4,3);
+	graph.addHeuristic(2,5,3);
+	graph.addHeuristic(2,6,8);
+	graph.addHeuristic(2,7,5);
+	graph.addHeuristic(2,8,6);
+	graph.addHeuristic(2,9,9);
+	graph.addHeuristic(2,10,9);
+	//graph.addHeuristic(3,1,);
+	//graph.addHeuristic(3,2,);
+	graph.addHeuristic(3,3,0);
+	graph.addHeuristic(3,4,5);
+	graph.addHeuristic(3,5,6);
+	graph.addHeuristic(3,6,3);
+	graph.addHeuristic(3,7,3);
+	graph.addHeuristic(3,8,6);
+	graph.addHeuristic(3,9,5);
+	graph.addHeuristic(3,10,8);
+	//graph.addHeuristic(4,1,);
+	//graph.addHeuristic(4,2,);
+	//graph.addHeuristic(4,3,);
+	graph.addHeuristic(4,4,0);
+	graph.addHeuristic(4,5,5);
+	graph.addHeuristic(4,6,8);
+	graph.addHeuristic(4,7,6);
+	graph.addHeuristic(4,8,2);
+	graph.addHeuristic(4,9,5);
+	graph.addHeuristic(4,10,9);
+	//graph.addHeuristic(5,1,);
+	//graph.addHeuristic(5,2,);
+	//graph.addHeuristic(5,3,);
+	//graph.addHeuristic(5,4,);
+	graph.addHeuristic(5,5,0);
+	graph.addHeuristic(5,6,6);
+	graph.addHeuristic(5,7,4);
+	graph.addHeuristic(5,8,3);
+	graph.addHeuristic(5,9,2);
+	graph.addHeuristic(5,10,5);
+	//graph.addHeuristic(6,1,);
+	//graph.addHeuristic(6,2,);
+	//graph.addHeuristic(6,3,);
+	//graph.addHeuristic(6,4,);
+	//graph.addHeuristic(6,5,);
+	graph.addHeuristic(6,6,0);
+	graph.addHeuristic(6,7,3);
+	graph.addHeuristic(6,8,8);
+	graph.addHeuristic(6,9,6);
+	graph.addHeuristic(6,10,4);
+	//graph.addHeuristic(7,1,);
+	//graph.addHeuristic(7,2,);
+	//graph.addHeuristic(7,3,);
+	//graph.addHeuristic(7,4,);
+	//graph.addHeuristic(7,5,);
+	//graph.addHeuristic(7,6,);
+	graph.addHeuristic(7,7,0);
+	graph.addHeuristic(7,8,4);
+	graph.addHeuristic(7,9,3);
+	graph.addHeuristic(7,10,3);
+	//graph.addHeuristic(8,1,);
+	//graph.addHeuristic(8,2,);
+	//graph.addHeuristic(8,3,);
+	//graph.addHeuristic(8,4,);
+	//graph.addHeuristic(8,5,);
+	//graph.addHeuristic(8,6,);
+	//graph.addHeuristic(8,7,);
+	graph.addHeuristic(8,8,0);
+	graph.addHeuristic(8,9,4);
+	graph.addHeuristic(8,10,6);
+	//graph.addHeuristic(9,1,);
+	//graph.addHeuristic(9,2,);
+	//graph.addHeuristic(9,3,);
+	//graph.addHeuristic(9,4,);
+	//graph.addHeuristic(9,5,);
+	//graph.addHeuristic(9,6,);
+	//graph.addHeuristic(9,7,);
+	//graph.addHeuristic(9,8,);
+	graph.addHeuristic(9,9,0);
+	graph.addHeuristic(9,10,2);
+	//graph.addHeuristic(10,1,);
+	//graph.addHeuristic(10,2,);
+	//graph.addHeuristic(10,3,);
+	//graph.addHeuristic(10,4,);
+	//graph.addHeuristic(10,5,);
+	//graph.addHeuristic(10,6,);
+	//graph.addHeuristic(10,7,);
+	//graph.addHeuristic(10,8,);
+	//graph.addHeuristic(10,9,);
+	graph.addHeuristic(10,10,0);
+
 	useEffect(() => {
 		async function load() {
 			const nodesTemp = [];
@@ -82,14 +183,14 @@ function MainPage() {
 		} while (currentDate - date < milliseconds);
 	}
 	
-	const onClickNode = function(nodeId) {
-		window.alert(`Clicked node ${nodeId}`);
+	const onClickNode = function(nodeId) {          // IDEIA: AO CLICAR NOS NÓS, SELECIONAR ELES COMO PONTO DE PARTIDA E PONTO DE CHEGADA
+		//window.alert(`Clicked node ${nodeId}`);
 	};
-	
+	/*
 	const onClickLink = function(source, target) {
 		window.alert(`Clicked link between ${source} and ${target}`);
 	};
-	
+	*/
 	const onClickDFS = async () => {
 		const path = graph.dfs(1);
 		console.log(path);
@@ -196,16 +297,21 @@ function MainPage() {
 		
 	}
 
+	const onCLickGBFS = async () {
+		const pathGFS = graph.GBFS(startNode,endNode); // precisa passar o nó inicial e final
+	}
+
 	return(
 		<>
 			<button onClick={onClickDFS}>DFS</button>
 			<button onClick={onClickBFS}>BFS</button>
+			<button onClick={onCLickGBFS}>GBFS</button>
 			<Graph
 				id="graph-id" // id is mandatory
 				data={data}
 				config={myConfig}
 				onClickNode={onClickNode}
-				onClickLink={onClickLink}
+				//onClickLink={onClickLink}
 			/>
 		</>
 	);
