@@ -230,6 +230,18 @@ class MainPage extends React.Component {
 
 		}
 
+		const onClickDijkstra = () => {
+			console.log("DFS")
+
+			const path = this.graph.dijkstra(1);
+			if (path !== undefined && path !== null && path.length > 0) {
+				this.changeColor(path)
+			} else {
+				this.setState({message: "There is no path for the search you're looking for"})
+			}
+
+		}
+
 		const onCLickGBFS = async () => {
 			console.log("GBFS")
 			const pathGFS = this.graph.GBFS(1, 9);
@@ -245,6 +257,7 @@ class MainPage extends React.Component {
 				<button onClick={onClickDFS}>DFS</button>
 				<button onClick={onClickBFS}>BFS</button>
 				<button onClick={onCLickGBFS}>GBFS</button>
+				<button onClick={onClickDijkstra}>DIJKSTRA</button>
 				<p>{this.state.message}</p>
 				<Graph
 					id="graph-id" // id is mandatory
