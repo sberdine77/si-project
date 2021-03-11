@@ -65,7 +65,6 @@ Grafo.prototype.dfs = function(source) {
 }
 
 Grafo.prototype.GBFS = function(startNode,endNode){
-	//let result = [];
   let openQueue = [];
   let closedQueue = [];
   let parent = [];
@@ -77,16 +76,28 @@ Grafo.prototype.GBFS = function(startNode,endNode){
       if(this.heuristic[op][endNode] <= minHeuristic){
         minHeuristic = this.heuristic[op][endNode] ;
         minHeuristicID = op ;
-        closedQueue.push(op); // momento de adicionar o no como visitado na tela
+        closedQueue.push(op); 
+        // momento de adicionar o no como visitado na tela
         openQueue.splice(openQueue.indexOf(op),1);
       }
     }
     for(let i of this.adjacencyList[minHeuristicID]){
       if(i === endNode){
         parent[i]=minHeuristicID;
-        // momento de adicionar o no como visitado na tela e printar o caminho inteiro na tela
-		closedQueue.push(i);
-		return closedQueue;
+		    closedQueue.push(i);
+        // momento de adicionar o no como visitado na tela
+        let caminho = [];
+        let pai = endNode;
+        caminho.push(pai);
+        for(let i in this.adjacencyList){
+          caminho.push(parent[pai]);
+          if(parent[pai]===startNode){
+            caminho.reverse();
+            return caminho; // printar o caminho inteiro na tela
+            break;
+          }
+          pai = parent[pai];
+        }
         break;
       }
       if(!closedQueue.includes(i) && !openQueue.includes(i)){
@@ -96,7 +107,6 @@ Grafo.prototype.GBFS = function(startNode,endNode){
     }
   }
   // se sai do while então não tem solução
-
 }
 
 export default Grafo;
