@@ -31,6 +31,107 @@ class MainPage extends React.Component {
 		this.graph.addLink(9, 10);
 		this.graph.addLink(6, 10);
 
+		this.graph.addHeuristic(1,1,0);
+		this.graph.addHeuristic(1,2,11);
+		this.graph.addHeuristic(1,3,7);
+		this.graph.addHeuristic(1,4,9);
+		this.graph.addHeuristic(1,5,3);
+		this.graph.addHeuristic(1,6,12);
+		this.graph.addHeuristic(1,7,10);
+		this.graph.addHeuristic(1,8,12);
+		this.graph.addHeuristic(1,9,13);
+		this.graph.addHeuristic(1,10,15);
+		//this.graph.addHeuristic(2,1,);
+		this.graph.addHeuristic(2,2,0);
+		this.graph.addHeuristic(2,3,4);
+		this.graph.addHeuristic(2,4,3);
+		this.graph.addHeuristic(2,5,3);
+		this.graph.addHeuristic(2,6,8);
+		this.graph.addHeuristic(2,7,5);
+		this.graph.addHeuristic(2,8,6);
+		this.graph.addHeuristic(2,9,9);
+		this.graph.addHeuristic(2,10,9);
+		//this.graph.addHeuristic(3,1,);
+		//this.graph.addHeuristic(3,2,);
+		this.graph.addHeuristic(3,3,0);
+		this.graph.addHeuristic(3,4,5);
+		this.graph.addHeuristic(3,5,6);
+		this.graph.addHeuristic(3,6,3);
+		this.graph.addHeuristic(3,7,3);
+		this.graph.addHeuristic(3,8,6);
+		this.graph.addHeuristic(3,9,5);
+		this.graph.addHeuristic(3,10,8);
+		//this.graph.addHeuristic(4,1,);
+		//this.graph.addHeuristic(4,2,);
+		//this.graph.addHeuristic(4,3,);
+		this.graph.addHeuristic(4,4,0);
+		this.graph.addHeuristic(4,5,5);
+		this.graph.addHeuristic(4,6,8);
+		this.graph.addHeuristic(4,7,6);
+		this.graph.addHeuristic(4,8,2);
+		this.graph.addHeuristic(4,9,5);
+		this.graph.addHeuristic(4,10,9);
+		//this.graph.addHeuristic(5,1,);
+		//this.graph.addHeuristic(5,2,);
+		//this.graph.addHeuristic(5,3,);
+		//this.graph.addHeuristic(5,4,);
+		this.graph.addHeuristic(5,5,0);
+		this.graph.addHeuristic(5,6,6);
+		this.graph.addHeuristic(5,7,4);
+		this.graph.addHeuristic(5,8,3);
+		this.graph.addHeuristic(5,9,2);
+		this.graph.addHeuristic(5,10,5);
+		//this.graph.addHeuristic(6,1,);
+		//this.graph.addHeuristic(6,2,);
+		//this.graph.addHeuristic(6,3,);
+		//this.graph.addHeuristic(6,4,);
+		//this.graph.addHeuristic(6,5,);
+		this.graph.addHeuristic(6,6,0);
+		this.graph.addHeuristic(6,7,3);
+		this.graph.addHeuristic(6,8,8);
+		this.graph.addHeuristic(6,9,6);
+		this.graph.addHeuristic(6,10,4);
+		//this.graph.addHeuristic(7,1,);
+		//this.graph.addHeuristic(7,2,);
+		//this.graph.addHeuristic(7,3,);
+		//this.graph.addHeuristic(7,4,);
+		//this.graph.addHeuristic(7,5,);
+		//this.graph.addHeuristic(7,6,);
+		this.graph.addHeuristic(7,7,0);
+		this.graph.addHeuristic(7,8,4);
+		this.graph.addHeuristic(7,9,3);
+		this.graph.addHeuristic(7,10,3);
+		//this.graph.addHeuristic(8,1,);
+		//this.graph.addHeuristic(8,2,);
+		//this.graph.addHeuristic(8,3,);
+		//this.graph.addHeuristic(8,4,);
+		//this.graph.addHeuristic(8,5,);
+		//this.graph.addHeuristic(8,6,);
+		//this.graph.addHeuristic(8,7,);
+		this.graph.addHeuristic(8,8,0);
+		this.graph.addHeuristic(8,9,4);
+		this.graph.addHeuristic(8,10,6);
+		//this.graph.addHeuristic(9,1,);
+		//this.graph.addHeuristic(9,2,);
+		//this.graph.addHeuristic(9,3,);
+		//this.graph.addHeuristic(9,4,);
+		//this.graph.addHeuristic(9,5,);
+		//this.graph.addHeuristic(9,6,);
+		//this.graph.addHeuristic(9,7,);
+		//this.graph.addHeuristic(9,8,);
+		this.graph.addHeuristic(9,9,0);
+		this.graph.addHeuristic(9,10,2);
+		//this.graph.addHeuristic(10,1,);
+		//this.graph.addHeuristic(10,2,);
+		//this.graph.addHeuristic(10,3,);
+		//this.graph.addHeuristic(10,4,);
+		//this.graph.addHeuristic(10,5,);
+		//this.graph.addHeuristic(10,6,);
+		//this.graph.addHeuristic(10,7,);
+		//this.graph.addHeuristic(10,8,);
+		//this.graph.addHeuristic(10,9,);
+		this.graph.addHeuristic(10,10,0);
+
 		const nodesTemp = [];
 		const linksTemp = [];
 
@@ -49,9 +150,9 @@ class MainPage extends React.Component {
 		}
 
 		this.state = {
-			data: data
+			data: data,
+			message: ""
 		}
-
 	}
 
 	changeColor = async function(nodeIds) {
@@ -109,7 +210,11 @@ class MainPage extends React.Component {
 
 			const path = this.graph.dfs(1);
 
-			this.changeColor(path)
+			if (path !== undefined && path !== null && path.length > 0) {
+				this.changeColor(path)
+			} else {
+				this.setState({message: "There is no path for the search you're looking for"})
+			}
 			
 		}
 
@@ -117,14 +222,30 @@ class MainPage extends React.Component {
 			console.log("DFS")
 
 			const path = this.graph.bfs(1);
+			if (path !== undefined && path !== null && path.length > 0) {
+				this.changeColor(path)
+			} else {
+				this.setState({message: "There is no path for the search you're looking for"})
+			}
 
-			this.changeColor(path)
+		}
+
+		const onCLickGBFS = async () => {
+			console.log("GBFS")
+			const pathGFS = this.graph.GBFS(1, 9);
+			if (pathGFS !== undefined && pathGFS !== null && pathGFS.length > 0) {
+				this.changeColor(pathGFS)
+			} else {
+				this.setState({message: "There is no path for the search you're looking for"})
+			}
 		}
 
 		return(
 			<>
 				<button onClick={onClickDFS}>DFS</button>
 				<button onClick={onClickBFS}>BFS</button>
+				<button onClick={onCLickGBFS}>GBFS</button>
+				<p>{this.state.message}</p>
 				<Graph
 					id="graph-id" // id is mandatory
 					data={this.state.data}
