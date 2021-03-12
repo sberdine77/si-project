@@ -239,7 +239,7 @@ Grafo.prototype.AEstrela = function(startNode, endNode){
   openQueue.push(startNode);
   while(openQueue.length > 0){
     minCost = Number.MAX_VALUE ; 
-    for(let op in openQueue){
+    for(let op of openQueue){
       if(nodeCost[op] + this.heuristic[op][endNode] <= minCost){
         minCost = nodeCost[op];
         minCostID = op;

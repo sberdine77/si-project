@@ -264,7 +264,7 @@ class MainPage extends React.Component {
 			}
 		}
 
-		const onCLickUC = async () => {
+		const onClickUC = async () => {
 			console.log("UC")
 			const pathUC = this.graph.UC(1, 9);
 			if (pathUC !== undefined && pathUC !== null && pathUC.length > 0) {
@@ -274,7 +274,7 @@ class MainPage extends React.Component {
 			}
 		}
 
-		const onCLickAEstrela = async () => {
+		const onClickAEstrela = async () => {
 			console.log("A*")
 			const pathAE = this.graph.AEstrela(1, 9);
 			if (pathAE !== undefined && pathAE !== null && pathAE.length > 0) {
@@ -291,6 +291,7 @@ class MainPage extends React.Component {
 				<button onClick={onCLickGBFS}>GBFS</button>
 				<button onClick={onClickDijkstra}>DIJKSTRA</button>
 				<button onClick={onClickUC}>UC</button>
+				<button onClick={onClickAEstrela}>AEstrela</button>
 				<p>{this.state.message}</p>
 				<Graph
 					id="graph-id" // id is mandatory
