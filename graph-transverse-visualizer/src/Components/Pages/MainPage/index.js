@@ -287,7 +287,7 @@ class MainPage extends React.Component {
 
 		const onClickUC = async () => {
 			console.log("UC")
-			const pathUC = this.graph.UC(1, 4);
+			const pathUC = this.graph.UC(1, 9);
 			if (pathUC !== undefined && pathUC !== null && pathUC.length > 0) {
 				this.changeColor(pathUC)
 			} else {
@@ -303,7 +303,7 @@ class MainPage extends React.Component {
 				{/* <button onClick={onClickDijkstra}>DIJKSTRA</button> */}
 				<button onClick={onCLickAstar}>ASTAR</button>
 
-				<button onClick={onCLickUC}>UC</button>
+				<button onClick={onClickUC}>UC</button>
 
 				<p>{this.state.message}</p>
 				<Graph
