@@ -132,6 +132,18 @@ class MainPage extends React.Component {
 		//this.graph.addHeuristic(10,9,);
 		this.graph.addHeuristic(10,10,0);
 
+		this.graph.addCost(1, 2, 4);
+		this.graph.addCost(1, 3, 5);
+		this.graph.addCost(2, 4, 1);
+		this.graph.addCost(2, 5, 7);
+		this.graph.addCost(3, 6, 2);
+		this.graph.addCost(3, 7, 6);
+		this.graph.addCost(4, 8, 9);
+		this.graph.addCost(5, 9, 3);
+		this.graph.addCost(8, 9, 3);
+		this.graph.addCost(9, 10, 4);
+		this.graph.addCost(6, 10, 7);
+
 		const nodesTemp = [];
 		const linksTemp = [];
 
@@ -252,12 +264,23 @@ class MainPage extends React.Component {
 			}
 		}
 
+		const onCLickUC = async () => {
+			console.log("UC")
+			const pathUC = this.graph.UC(1, 9);
+			if (pathUC !== undefined && pathUC !== null && pathUC.length > 0) {
+				this.changeColor(pathUC)
+			} else {
+				this.setState({message: "There is no path for the search you're looking for"})
+			}
+		}
+
 		return(
 			<>
 				<button onClick={onClickDFS}>DFS</button>
 				<button onClick={onClickBFS}>BFS</button>
 				<button onClick={onCLickGBFS}>GBFS</button>
 				<button onClick={onClickDijkstra}>DIJKSTRA</button>
+				<button onClick={onClickUC}>UC</button>
 				<p>{this.state.message}</p>
 				<Graph
 					id="graph-id" // id is mandatory
