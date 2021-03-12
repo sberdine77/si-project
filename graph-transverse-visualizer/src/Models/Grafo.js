@@ -132,13 +132,13 @@ Grafo.prototype.astar = function(start, goal) {
   var euSize = 0;
   for(let i in this.heuristic) euSize++
 
-  //var euristic = [];
-  //for(var i = 1; i < euSize+1; i++) {
-  //  euristic[i-1] = [];
-  //  for(var j=0; j < euSize; j++) {
-  //    euristic[i-1][j] = this.heuristic[i][j];
-  //  }
-  //}
+  var euristic = [];
+  for(var i = 1; i < euSize+1; i++) {
+    euristic[i-1] = [];
+    for(var j=0; j < euSize; j++) {
+      euristic[i-1][j] = this.heuristic[i][j];
+    }
+  }
 
   //for(var i = 0; i < euSize; i++) {
   //  for(var j=0; j < euSize; j++) {
@@ -146,19 +146,7 @@ Grafo.prototype.astar = function(start, goal) {
   //  }
   //}
 
-  var euristic = [
-    [0,3,2,3,4,5,6,7,8,9,10],
-    [0,0,2,3,4,5,6,7,8,9,10],
-    [0,1,0,3,4,5,6,7,8,9,10],
-    [0,1,2,0,4,5,6,7,8,9,10],
-    [0,1,2,3,0,5,6,7,8,9,10],
-    [0,1,2,3,4,0,6,7,8,9,10],
-    [0,1,2,3,4,5,0,7,8,9,10],
-    [0,1,2,3,4,5,6,0,8,9,10],
-    [0,1,2,3,4,5,6,0,0,9,10],
-    [0,1,2,3,4,5,6,0,0,0,10],
-    [0,1,2,3,4,5,6,0,0,9,0]
-  ];
+  
 
 
 
