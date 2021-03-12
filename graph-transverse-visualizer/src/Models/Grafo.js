@@ -308,9 +308,11 @@ Grafo.prototype.UC = function(startNode, endNode){
   nodeCost[startNode] = 0;
   openQueue.push(startNode);
   while(openQueue.length > 0){
+    console.log("openQueue: "+openQueue+"\n");
     minCost = Number.MAX_VALUE ; 
-    for(let op in openQueue){
+    for(let op of openQueue){
       if(nodeCost[op] <= minCost){
+        console.log("nodeCost["+op+"] = "+nodeCost[op]+"\n");
         minCost = nodeCost[op];
         minCostID = op;
         //closedQueue.push(op); 
@@ -321,15 +323,17 @@ Grafo.prototype.UC = function(startNode, endNode){
 	console.log("while pos for")
     closedQueue.push(minCostID);
     openQueue.splice(openQueue.indexOf(minCostID),1);
+    console.log("openQueue: "+openQueue+"\n"+"closeQueue: "+closedQueue+"\n");
     if(minCostID === endNode){
       //parent[i]=minCostID;
-		  closedQueue.push(minCostID);
+		  //closedQueue.push(minCostID);
       // momento de adicionar o no como visitado na tela
       let caminho = [];
       let pai = endNode;
       caminho.push(pai);
       for(let i in this.adjacencyList){
         caminho.push(parent[pai]);
+        console.log("caminho: "+caminho+"\n");
         if(parent[pai]===startNode){
           caminho.reverse();
 		  console.log(caminho)
