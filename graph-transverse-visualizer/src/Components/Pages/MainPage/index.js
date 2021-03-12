@@ -264,7 +264,7 @@ class MainPage extends React.Component {
 			}
 		}
 
-		const onCLickUC = async () => {
+		const onClickUC = async () => {
 			console.log("UC")
 			const pathUC = this.graph.UC(1, 9);
 			if (pathUC !== undefined && pathUC !== null && pathUC.length > 0) {
