@@ -109,6 +109,7 @@ Grafo.prototype.GBFS = function(startNode,endNode){
   // se sai do while então não tem solução
 }
 
+<<<<<<< HEAD
 
 
 Grafo.prototype.astar = function(start, goal) {
@@ -147,21 +148,53 @@ Grafo.prototype.astar = function(start, goal) {
   }
 
 
+=======
+Grafo.prototype.astar = function(start, goal) {
+
+  //var graph = [
+  //    [0,1,0,0,0,10],
+  //    [0,0,2,1,0,0],
+  //    [0,0,0,0,5,0],
+  //    [0,0,0,0,3,4],
+  //    [0,0,0,0,0,2],
+  //    [0,0,0,0,0,0]
+  //];
+
+  //var heuristic = [
+  //    [0,0,0,0,0,5],
+  //    [0,0,0,0,0,3],
+  //    [0,0,0,0,0,4],
+  //    [0,0,0,0,0,2],
+  //    [0,0,0,0,0,6],
+  //    [0,0,0,0,0,0]
+  //];
+>>>>>>> 7f1c15f7e4c477eb72f16db43cd63f5f2d39908d
 
   //distancia do nó inicial para os outros nos
   var distances = [];
   //inicializando com distancia infinita
+<<<<<<< HEAD
   for(var i = 0; i < graph.length; i++) distances[i] = Number.MAX_VALUE;
+=======
+  for (var i = 0; i < this.adjacencyList.length; i++) distances[i] = Number.MAX_VALUE;
+>>>>>>> 7f1c15f7e4c477eb72f16db43cd63f5f2d39908d
   //a distancia do no inicial para si mesmo é 0
   distances[start] = 0;
 
   //prioridades de visita, calculado pela euristica
   var priorities = [];
   //inicializando com prioridade infinita
+<<<<<<< HEAD
   for (var k = 0; k < graph.length; k++) priorities[k] = Number.MAX_VALUE;
 
   //eurisitica do no inicial
   priorities[start] = euristic[start][goal];
+=======
+  for (var k = 0; k < this.adjacencyList.length; k++) priorities[k] = Number.MAX_VALUE;
+  //eurisitica do no inicial
+  priorities[start] = this.heuristic[start][goal];
+
+>>>>>>> 7f1c15f7e4c477eb72f16db43cd63f5f2d39908d
   //se o nó foi visitado
   var visited = [];
 
@@ -200,6 +233,7 @@ Grafo.prototype.astar = function(start, goal) {
       console.log("Visiting node " + lowestPriorityIndex + " with currently lowest priority of " + lowestPriority);
 
       //...então para todos os vizinhos ainda não visitados....
+<<<<<<< HEAD
       for (var i = 0; i < graph[lowestPriorityIndex].length; i++) {
         //console.log("graph lowest priority index " + graph[lowestPriorityIndex].length)
           if (graph[lowestPriorityIndex][i] !== 0 && !visited[i]) {
@@ -209,6 +243,16 @@ Grafo.prototype.astar = function(start, goal) {
                   distances[i] = distances[lowestPriorityIndex] + graph[lowestPriorityIndex][i];
                   //...e sete a prioridade
                   priorities[i] = distances[i] + euristic[i][goal];
+=======
+      for (var i = 0; i < this.adjacencyList[lowestPriorityIndex].length; i++) {
+          if (this.adjacencyList[lowestPriorityIndex][i] !== 0 && !visited[i]) {
+              //...se o caminho é menor...
+              if (distances[lowestPriorityIndex] + this.adjacencyList[lowestPriorityIndex][i] < distances[i]) {
+                  //...salve como menor caminho
+                  distances[i] = distances[lowestPriorityIndex] + this.adjacencyList[lowestPriorityIndex][i];
+                  //...e sete a prioridade
+                  priorities[i] = distances[i] + this.heuristic[i][goal];
+>>>>>>> 7f1c15f7e4c477eb72f16db43cd63f5f2d39908d
                   console.log("Updating distance of node " + i + " to " + distances[i] + " and priority to " + priorities[i]);
               }
           }
