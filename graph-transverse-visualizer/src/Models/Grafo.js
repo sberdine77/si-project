@@ -132,19 +132,33 @@ Grafo.prototype.astar = function(start, goal) {
   var euSize = 0;
   for(let i in this.heuristic) euSize++
 
-  var euristic = [];
-  for(var i = 1; i < euSize+1; i++) {
-    euristic[i-1] = [];
-    for(var j=0; j < euSize; j++) {
-      euristic[i-1][j] = this.heuristic[i][j];
-    }
-  }
+  //var euristic = [];
+  //for(var i = 1; i < euSize+1; i++) {
+  //  euristic[i-1] = [];
+  //  for(var j=0; j < euSize; j++) {
+  //    euristic[i-1][j] = this.heuristic[i][j];
+  //  }
+  //}
 
-  for(var i = 0; i < euSize; i++) {
-    for(var j=0; j < euSize; j++) {
-      console.log(euristic[i][j])
-    }
-  }
+  //for(var i = 0; i < euSize; i++) {
+  //  for(var j=0; j < euSize; j++) {
+  //    console.log(euristic[i][j])
+  //  }
+  //}
+
+  var euristic = [
+    [0,3,2,3,4,5,6,7,8,9,10],
+    [0,0,2,3,4,5,6,7,8,9,10],
+    [0,1,0,3,4,5,6,7,8,9,10],
+    [0,1,2,0,4,5,6,7,8,9,10],
+    [0,1,2,3,0,5,6,7,8,9,10],
+    [0,1,2,3,4,0,6,7,8,9,10],
+    [0,1,2,3,4,5,0,7,8,9,10],
+    [0,1,2,3,4,5,6,0,8,9,10],
+    [0,1,2,3,4,5,6,0,0,9,10],
+    [0,1,2,3,4,5,6,0,0,0,10],
+    [0,1,2,3,4,5,6,0,0,9,0]
+  ];
 
 
 
@@ -159,9 +173,12 @@ Grafo.prototype.astar = function(start, goal) {
   var priorities = [];
   //inicializando com prioridade infinita
   for (var k = 0; k < graph.length; k++) priorities[k] = Number.MAX_VALUE;
+  console.log(priorities)
 
   //eurisitica do no inicial
   priorities[start] = euristic[start][goal];
+  
+  console.log(priorities)
   //se o nó foi visitado
   var visited = [];
 
@@ -179,8 +196,11 @@ Grafo.prototype.astar = function(start, goal) {
           }
       }
 
+      console.log(lowestPriorityIndex)
+
       if (lowestPriorityIndex === -1) {
           // não foi encontrado o caminho final
+          console.log("Goal node not found :C")
           return -1;
       } else if (lowestPriorityIndex === goal) {
           // caminho final encontrado

@@ -233,6 +233,7 @@ class MainPage extends React.Component {
 		const onCLickGBFS = async () => {
 			console.log("GBFS")
 			const pathGFS = this.graph.GBFS(1, 9);
+			this.setState({message: pathGFS})
 			if (pathGFS !== undefined && pathGFS !== null && pathGFS.length > 0) {
 				this.changeColor(pathGFS)
 			} else {
