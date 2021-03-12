@@ -318,6 +318,7 @@ Grafo.prototype.UC = function(startNode, endNode){
         //openQueue.splice(openQueue.indexOf(op),1);
       }
     }
+	console.log("while pos for")
     closedQueue.push(minCostID);
     openQueue.splice(openQueue.indexOf(minCostID),1);
     if(minCostID === endNode){
