@@ -274,6 +274,16 @@ class MainPage extends React.Component {
 			}
 		}
 
+		const onCLickAEstrela = async () => {
+			console.log("A*")
+			const pathAE = this.graph.AEstrela(1, 9);
+			if (pathAE !== undefined && pathAE !== null && pathAE.length > 0) {
+				this.changeColor(pathAE)
+			} else {
+				this.setState({message: "There is no path for the search you're looking for"})
+			}
+		}
+
 		return(
 			<>
 				<button onClick={onClickDFS}>DFS</button>

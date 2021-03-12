@@ -225,4 +225,60 @@ Grafo.prototype.UC = function(startNode, endNode){
   // se sai do while então não tem solução
 }
 
+Grafo.prototype.AEstrela = function(startNode, endNode){
+  let openQueue = [];
+  let closedQueue = [];
+  let parent = [];
+  let nodeCost = [];
+  for(let i = 1 ; i<=10 ; i++){
+    nodeCost[i] = Number.MAX_VALUE;
+  }
+  let minCost = Number.MAX_VALUE;
+  let minCostID = startNode ;
+  nodeCost[startNode] = 0;
+  openQueue.push(startNode);
+  while(openQueue.length > 0){
+    minCost = Number.MAX_VALUE ; 
+    for(let op in openQueue){
+      if(nodeCost[op] + this.heuristic[op][endNode] <= minCost){
+        minCost = nodeCost[op];
+        minCostID = op;
+        //closedQueue.push(op); 
+        // momento de adicionar o no como visitado na tela
+        //openQueue.splice(openQueue.indexOf(op),1);
+      }
+    }
+    closedQueue.push(minCostID);
+    openQueue.splice(openQueue.indexOf(minCostID),1);
+    if(minCostID === endNode){
+      //parent[i]=minCostID;
+		  closedQueue.push(minCostID);
+      // momento de adicionar o no como visitado na tela
+      let caminho = [];
+      let pai = endNode;
+      caminho.push(pai);
+      for(let i in this.adjacencyList){
+        caminho.push(parent[pai]);
+        if(parent[pai]===startNode){
+          caminho.reverse();
+          return caminho; // printar o caminho inteiro na tela
+          //break;
+        }
+        pai = parent[pai];
+      }
+    }
+    for(let i of this.adjacencyList[minCostID]){
+      if(!closedQueue.includes(i) && !openQueue.includes(i)){
+        //parent[i]=minHeuristicID;
+        openQueue.push(i);
+      }
+      if(openQueue.includes(i) && (this.cost[minCostID][i] + nodeCost[minCostID] < nodeCost[i])){
+        nodeCost[i] = this.cost[minCostID][i] + nodeCost[minCostID];
+        parent[i]=minCostID;
+      }
+    }
+  }
+  // se sai do while então não tem solução
+}
+
 export default Grafo;
