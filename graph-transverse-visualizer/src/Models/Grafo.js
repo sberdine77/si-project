@@ -64,59 +64,61 @@ Grafo.prototype.dfs = function(source) {
     return result;
 }
 
-Grafo.prototype.dijkstra = function (noInicial) {
+// Grafo.prototype.dijkstra = function (noInicial) {
  
-    //Distância do nó inicial para todos os outros nós
-    var distancia = [];
-    //Inicilizando os nós com a distância "Infinito"
-    for (var i = 0; i < this.adjacencyList.length; i++) distancia[i] = Number.MAX_VALUE;
-    //a distância do nó inicial pra ele mesmo é zero
-    distancia[noInicial] = 0;
+//     //Distância do nó inicial para todos os outros nós
+//     var distancia = [];
+//     //Inicilizando os nós com a distância "Infinito"
+//     for (var i = 0; i < Object.keys(this.adjacencyList).length; i++) distancia[i] = Number.MAX_VALUE;
+//     //a distância do nó inicial pra ele mesmo é zero
+//     distancia[noInicial] = 0;
+// 	console.log("TAMANHO")
+// 	console.log(this.adjacencyList[1].length)
  
-    //Vetor que contém se um nó já foi visitado ou não
-    var visitados = [];
-	var result = [];
+//     //Vetor que contém se um nó já foi visitado ou não
+//     var visitados = [];
+// 	var result = [];
  
-    //Enquanto houver nós que não foram visitiados
-    while (true) {
-        // ... o nó que atualmente tem a menor distância até o nó inicial
-        var menorDistancia = Number.MAX_VALUE;
-        var menorIndice = -1;
-        for (var j = 0; j < this.adjacencyList.length; j++) {
-            //visitando os nós que ainda não foram visitados
-            if (distancia[j] < menorDistancia && !visitados[j]) {
-                menorDistancia = distancia[j];
-                menorIndice = j;
-            }
-        }
+//     //Enquanto houver nós que não foram visitiados
+//     while (true) {
+//         // ... o nó que atualmente tem a menor distância até o nó inicial
+//         var menorDistancia = Number.MAX_VALUE;
+//         var menorIndice = -1;
+//         for (var j = 0; j < Object.keys(this.adjacencyList).length; j++) {
+//             //visitando os nós que ainda não foram visitados
+//             if (distancia[j] < menorDistancia && !visitados[j]) {
+//                 menorDistancia = distancia[j];
+//                 menorIndice = j;
+//             }
+//         }
  
-        console.log("Visitando o no " + menorIndice + " cuja distancia atual é " + menorDistancia);
+//         console.log("Visitando o no " + menorIndice + " cuja distancia atual é " + menorDistancia);
  
-		result.push(menorIndice);
+// 		result.push(menorIndice);
 
-        if (menorIndice === -1) {
-            // Todos os nós foram visitados. O algoritmo acabou. 
-			console.log(visitados)
-			return result;
-            //return distancia;
-        }
+//         if (menorIndice === -1) {
+//             // Todos os nós foram visitados. O algoritmo acabou. 
+// 			console.log(visitados)
+// 			return result;
+//             //return distancia;
+//         }
  
-        //visitando os nós vizinhos
-        for (var k = 0; k < this.adjacencyList[menorIndice].length; k++) {
-            //se esse for o caminho mais curto
-            if (this.adjacencyList[menorIndice][k] !== 0 && distancia[k] > distancia[menorIndice] + this.adjacencyList[menorIndice][k]) {
-                //salve esse caminho com o mais "caminho mais curto"
-                distancia[k] = distancia[menorIndice] + this.adjacencyList[menorIndice][k];
-                console.log("Atualizando a distancia do no " + k + " para " + distancia[k]);
-            }
-        }
-        // terminanos de executar o algoritmo para um nó
-        visitados[menorIndice] = true;
-        console.log("Nodes visitados: " + visitados);
-        console.log("A menor distancia atual distancia: " + distancia);
+//         //visitando os nós vizinhos
+//         for (var k = 0; k < this.adjacencyList[menorIndice + 1].length; k++) {
+//             //se esse for o caminho mais curto
+//             if (this.adjacencyList[menorIndice + 1][k] !== 0 && distancia[k] > distancia[menorIndice] + this.adjacencyList[menorIndice + 1][k]) {
+//                 //salve esse caminho com o mais "caminho mais curto"
+//                 distancia[k] = distancia[menorIndice] + this.adjacencyList[menorIndice + 1][k];
+//                 console.log("Atualizando a distancia do no " + k + " para " + distancia[k]);
+//             }
+//         }
+//         // terminanos de executar o algoritmo para um nó
+//         visitados[menorIndice] = true;
+//         console.log("Nodes visitados: " + visitados);
+//         console.log("A menor distancia atual distancia: " + distancia);
  
-    }
-}
+//     }
+// }
 
 Grafo.prototype.GBFS = function(startNode,endNode){
   let openQueue = [];
@@ -229,6 +231,7 @@ Grafo.prototype.astar = function(start, goal) {
           var result = result + visited.length;
           result = result + "]";
           console.log(result)
+			  
           return distances[lowestPriorityIndex];
       }
 
