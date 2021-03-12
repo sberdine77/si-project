@@ -171,40 +171,64 @@ Grafo.prototype.GBFS = function(startNode,endNode){
   // se sai do while então não tem solução
 }
 
+
+
 Grafo.prototype.astar = function(start, goal) {
 
-  //var graph = [
-  //    [0,1,0,0,0,10],
-  //    [0,0,2,1,0,0],
-  //    [0,0,0,0,5,0],
-  //    [0,0,0,0,3,4],
-  //    [0,0,0,0,0,2],
-  //    [0,0,0,0,0,0]
-  //];
+  
+  var size = 0;
+  for(let i in this.adjacencyList) size++
 
-  //var heuristic = [
-  //    [0,0,0,0,0,5],
-  //    [0,0,0,0,0,3],
-  //    [0,0,0,0,0,4],
-  //    [0,0,0,0,0,2],
-  //    [0,0,0,0,0,6],
-  //    [0,0,0,0,0,0]
-  //];
+
+  var graph = [];
+  for(var i = 1; i < size+1; i++) {
+    graph[i-1] = [];
+    for(var j=0; j < size; j++) {
+      graph[i-1][j] = 0;
+    }
+    for(var k=0; k<Object.keys(this.adjacencyList[i]).length; k++) {
+      graph[i-1][this.adjacencyList[i][k]-1] = 1;
+    }
+  }
+
+  var euSize = 0;
+  for(let i in this.heuristic) euSize++
+
+  var euristic = [];
+  for(var i = 1; i < euSize+1; i++) {
+    euristic[i-1] = [];
+    for(var j=0; j < euSize; j++) {
+      euristic[i-1][j] = this.heuristic[i][j];
+    }
+  }
+
+  //for(var i = 0; i < euSize; i++) {
+  //  for(var j=0; j < euSize; j++) {
+  //    console.log(euristic[i][j])
+  //  }
+  //}
+
+  
+
+
 
   //distancia do nó inicial para os outros nos
   var distances = [];
   //inicializando com distancia infinita
-  for (var i = 0; i < this.adjacencyList.length; i++) distances[i] = Number.MAX_VALUE;
+  for(var i = 0; i < graph.length; i++) distances[i] = Number.MAX_VALUE;
   //a distancia do no inicial para si mesmo é 0
   distances[start] = 0;
 
   //prioridades de visita, calculado pela euristica
   var priorities = [];
   //inicializando com prioridade infinita
-  for (var k = 0; k < this.adjacencyList.length; k++) priorities[k] = Number.MAX_VALUE;
-  //eurisitica do no inicial
-  priorities[start] = this.heuristic[start][goal];
+  for (var k = 0; k < graph.length; k++) priorities[k] = Number.MAX_VALUE;
+  console.log(priorities)
 
+  //eurisitica do no inicial
+  priorities[start] = euristic[start][goal];
+  
+  console.log(priorities)
   //se o nó foi visitado
   var visited = [];
 
@@ -222,38 +246,42 @@ Grafo.prototype.astar = function(start, goal) {
           }
       }
 
+      console.log(lowestPriorityIndex)
+
       if (lowestPriorityIndex === -1) {
           // não foi encontrado o caminho final
-		  console.log("ASTAR RETORNO -1")
+
+          console.log("Goal node not found :C")
+
           return -1;
       } else if (lowestPriorityIndex === goal) {
           // caminho final encontrado
           console.log("Goal node found!");
           console.log(distances[lowestPriorityIndex]);
-          var result = "[";
+          var result = [];
+          result.push(1);
           for (var j = 0; j < visited.length; j++) 
               if (visited[j] == true){
-                  result = result + j + ",";
+                  result.push(j+1);
               }
-          var result = result + visited.length;
-          result = result + "]";
           console.log(result)
-		  console.log("ASTAR RETORNO")
-		console.log(distances[lowestPriorityIndex])
-          return distances[lowestPriorityIndex];
+
+          return result;
+
       }
 
       console.log("Visiting node " + lowestPriorityIndex + " with currently lowest priority of " + lowestPriority);
 
       //...então para todos os vizinhos ainda não visitados....
-      for (var i = 0; i < this.adjacencyList[lowestPriorityIndex].length; i++) {
-          if (this.adjacencyList[lowestPriorityIndex][i] !== 0 && !visited[i]) {
+      for (var i = 0; i < graph[lowestPriorityIndex].length; i++) {
+        //console.log("graph lowest priority index " + graph[lowestPriorityIndex].length)
+          if (graph[lowestPriorityIndex][i] !== 0 && !visited[i]) {
               //...se o caminho é menor...
-              if (distances[lowestPriorityIndex] + this.adjacencyList[lowestPriorityIndex][i] < distances[i]) {
+              if (distances[lowestPriorityIndex] + graph[lowestPriorityIndex][i] < distances[i]) {
                   //...salve como menor caminho
-                  distances[i] = distances[lowestPriorityIndex] + this.adjacencyList[lowestPriorityIndex][i];
+                  distances[i] = distances[lowestPriorityIndex] + graph[lowestPriorityIndex][i];
                   //...e sete a prioridade
-                  priorities[i] = distances[i] + this.heuristic[i][goal];
+                  priorities[i] = distances[i] + euristic[i][goal];
                   console.log("Updating distance of node " + i + " to " + distances[i] + " and priority to " + priorities[i]);
               }
           }
