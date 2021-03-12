@@ -206,15 +206,14 @@ Grafo.prototype.astar = function(start, goal) {
           // caminho final encontrado
           console.log("Goal node found!");
           console.log(distances[lowestPriorityIndex]);
-          var result = "[";
+          var result = [];
+          result.push(1);
           for (var j = 0; j < visited.length; j++) 
               if (visited[j] == true){
-                  result = result + j + ",";
+                  result.push(j+1);
               }
-          var result = result + visited.length;
-          result = result + "]";
           console.log(result)
-          return distances[lowestPriorityIndex];
+          return result;
       }
 
       console.log("Visiting node " + lowestPriorityIndex + " with currently lowest priority of " + lowestPriority);
